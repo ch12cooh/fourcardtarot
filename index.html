@@ -1,0 +1,517 @@
+<script class="include" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<div> 
+    <!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<style>
+body {
+    background-image: url("darkbackground.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+	background-size: 100% 100%;
+    background-attachment: fixed;
+    background-color: black;
+	color: #9C7A5A;
+	font-family: Helvetica;
+	font-size: 8pt;
+	margin-left: 40px;
+}
+
+scrollbox {
+	font-color: #2A3F54;
+	color: #9C7A5A;
+	font-family: Helvetica;
+	font-size: 100%;
+	width:150px;
+	height:150px;
+	line-height:2em;
+	overflow:scroll;
+	padding:5px;
+}
+
+
+input {background-color: #10193E;
+	color: #83A7C6;
+	font-family: Helvetica;
+	font-size: 100%;
+	padding: 2px;
+	border-radius: 5px;
+	border: 0px solid #83A7C6;
+	font-weight: bold;
+	box-shadow: 0px 0px 2px 0px #090F26
+}
+
+.checkbxinput {
+	background-color: #4B7096;
+	color: #2A3F54;
+	border-radius: 10px;
+	border: 0px solid #83A7C6;
+	box-shadow: 0px 0px 6px 0px #090F26
+}
+
+textarea {background-color: #10193E;
+	color: #83A7C6;
+	font-family: Helvetica;
+	font-size: 100%;
+	padding: 6px;
+	border-radius: 10px;
+	border: 1px solid #83A7C6;
+	font-weight: bold;
+	box-shadow: 0px 0px 12px 0px #090F26
+}
+table, th, td {
+    text-align:center; 
+    vertical-align:middle;
+	font-size: 100%;
+    border: 0px;
+    border-collapse: collapse;
+	font-weight: bold;
+}
+th, td {
+    padding: 4px;
+}
+button {
+	border-radius: 3px;
+    background-color: #0B1433;
+    border: none;
+    color: #9C7A5A;
+    padding: 3px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 100%;	
+	margin: 4px;
+	
+	
+}
+
+button2 {
+	border-radius: 3px;
+    background-color: none;
+    color: #9C7A5A;
+    padding: 2px 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 90%;	
+	margin: 2px;
+	
+}
+
+button3 {
+	border-radius: 3px;
+    background-color: #10193E;
+    border: none;
+    color: #9C7A5A;
+    padding: 6px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 110%;	
+	margin: 8px;
+	box-shadow: 0px 0px 12px 2px #090F26
+}
+
+box {
+	border-radius: 5px;
+    background-color: #111C44;
+    width: 360px;
+    padding: 5px;
+    border: 2px solid #111C44;
+    margin: 5px;
+}
+
+ /* Style the Image Used to Trigger the Modal */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: .9;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 60px;
+    top: 40px;
+    width: 35%; /* Full width */
+    height: 75%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    height: 85%;
+    max-height: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #9C7A5A;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+
+</style>
+
+  </head>
+<body>
+<audio id="audio" style="display:none;" src="bowls.ogg" autoplay="true" loop="true"></audio>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- The Close Button -->
+  <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01">
+
+  <!-- Modal Caption (Image Text) 
+  <div id="caption"></div>-->
+  
+</div>
+
+<table class="site-layout" align="center"><tr>
+<!--COLUMN A--><td><table>
+<tr><td>
+	<table class="car-tableau">
+	<tr>
+	<td> &nbsp &nbsp &nbsp &nbsp </td>
+	<td> </br> </br><b>You Are...</b></br></br>
+	<img id="CardLeft" src="cardBACK2.png" style="width:60px; box-shadow: 1px 1px 15px 3px #090F26" ><br/> <!--#10193E"-->
+	<button class="CardLeft" type="button" id="leftbutton">Flip</button> </td>
+	<td>&nbsp &nbsp &nbsp </td>
+    <td></br></br><b>Motivation</b></br></br>
+	<img id="CardCenter" src="cardBACK2.png" style="width:60px; box-shadow: 1px 1px 15px 3px #090F26"><br/>
+	<button class="CardCenter" type="button" id="centerbutton">Flip</button></td>	
+	<td>&nbsp &nbsp &nbsp </td>	
+    <td></br></br><b>Obstacles</b></br></br>
+	<img id="CardRight" src="cardBACK2.png" style="width:60px; box-shadow: 1px 1px 15px 3px #090F26"><br/>
+	<button class="CardRight" type="button" id="rightbutton">Flip</button></td>
+	<td id = "fourthbreak">&nbsp &nbsp &nbsp </td>	
+    <td id ="fourthcard"></br></br><b>Resolution</b></br></br>
+	<img id="CardFour" src="cardBACK2.png" style="width:60px; box-shadow: 1px 1px 15px 3px #090F26"><br/>
+	<button class="CardFour" type="button" id="fourthbutton">Flip</button></td>
+	</table>
+</td></tr>
+
+	<tr><td>
+	
+	<box id="boxofbuttons">
+	<button2 class="Prompt1" type="button" id="Prompt1" style="border: 0px solid #9C7A5A">Prompt 1</button2>
+	<button2 class="Prompt2" type="button" id="Prompt2" style="border: 0px solid #9C7A5A">Prompt 2</button2>
+	<button2 class="Prompt3" type="button" id="Prompt3" style="border: 0px solid #9C7A5A">Prompt 3</button2>
+	<button2 class="Prompt4" type="button" id="Prompt4" style="border: 0px solid #9C7A5A">Prompt 4</button2>
+	<button2 class="Prompt0" type="button" id="Prompt0" style="border: 0px solid #9C7A5A">Meanings</button2>
+	</box>
+	<div id="structuretext"> </br> This is a <b>four card</b> tarot reading framework
+	</br> designed for questions about seeking knowlege: 
+	</br> "How can I better understand ___?" 
+	</br>
+	
+	<div id="yourquestion">
+	</br></br></br><b> Choosing Your Question </b> </br></br>
+	<textarea id="thequestion" name="thequestion" cols="40" rows="8" ></textarea> </br>
+	<button id="continue" class="continue" type="button">Continue</button> </br>
+	</div>
+	</td></tr>
+<div>
+<tr><td>
+<img id="PromptImg" src="blankprompt.png" style="height:350px; margin-top:10px; box-shadow: 0px 0px 18px 8px #10193E">
+<table id="promptall1" style="height=230px">
+	<tr>
+	<td> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </td>
+	<td><img id="CardDisplay" src="cardBACK2.png" style="height:190px; box-shadow: 0px 0px 40px 6px #10193E"></td>
+	<td>
+		<table><tr>
+			<td> </td>
+			<td> </td>
+		</tr><tr>
+			<td> &nbsp &nbsp </td>
+			<td> <div style="text-align:left" color="#4B7096" class="meaningtext"> </div> </td>
+		</tr>
+		</table>
+	</td>
+	</tr></table>
+</td></tr>
+<tr><td>
+<table id="promptall2" style = "height=130px"><tr>
+		<td> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </td>
+		<td><div style="width:250px;height:138px;line-height:1.1em;overflow:scroll;padding:8px;text-align:left" class="descriptiontext" color="#4B7096">
+		</div></td>
+</tr></table>
+</td></tr>
+</div>
+
+</table></td><!--SPACER COLUMN--><td><table><tr>
+<td> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </td>
+</tr></table></td><!--COLUMN B--><td><table>
+
+<tr><td>
+<table>
+<tr><td>
+	<div id="text1block" style="color: #83A7C6; text-align:left" >
+	This first card that you flip will tell you something about yourself. 
+	</br> All cards have many meanings.  Search through everything and use the parts that speak most strongly to you.
+	</br>  Don't shy away from makig claims amd connections that are bold, harsh, and/or cryptic.  </br>
+	<img src="text1block.png" style="width:717px"> </div>
+	<table id="datacollect1"class="datacollect1">
+	<tr>
+	<td>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </td>
+	<td>
+	<div style="text-align:left; max-width: 500px; font-weight:bold" color="#4B7096" class="questiontext"></div>
+	</td></tr>
+	<tr>
+	<!--<td id="beforedraw" class="beforedraw"> Your thoughts<br/>&nbsp before flipping &nbsp <br/>the card </br> representing <br/> YOURSELF </td> -->
+	<td>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </td>
+	<td> <textarea id="Text1" name="Text1" cols="80" rows="6" ></textarea></td>
+	</tr>
+	</table>
+</td></tr>
+
+<tr><td>
+	<table id="datacollect2"class="datacollect2"><tr>
+	<!--<td id="details"> The details, <br/> &nbsp memories, and &nbsp <br/> visual metaphors<br/> that the card <br/> causes you <br/> to recall<br/> </td> -->
+	<td>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </td>
+	<td class="datacollect2"><textarea id="Text2" name="Text2" cols="80" rows="11"></textarea></td>
+	</tr>
+	<tr><td>
+	<!--<button id="save-button" class="Save" type="button"><b>Click To Save </b></button>-->
+	</td></tr>
+	</table>
+</td></tr>
+
+<tr><td>
+<!--TABLE THAT COLLECTS EVERYTHING ELSE-->
+	<div id="datacollectblock"><img src="text1block.png" style="width:717px"></br></div>
+	<table id="datacollect"class="datacollect">
+		<tr>
+			<td>&nbsp &nbsp &nbsp &nbsp &nbsp </td>
+			<td>Selected Card Features: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </td>
+			<td>&nbsp &nbsp Selected Meanings:&nbsp &nbsp &nbsp   </td>
+			<td> &nbsp &nbsp </td>
+			<td>&nbsp &nbsp  &nbsp &nbsp Significant Words or Phrases:   &nbsp &nbsp &nbsp</td>
+		</tr>
+		<tr>
+			<td>&nbsp &nbsp &nbsp &nbsp &nbsp </td>
+			<td class='fet-data' style="text-align:left">
+			<form>
+				<input type="checkbox" id="feature0" value = "a"> <font color="#9C7A5A" class="feature0"> </font> </br>
+				<input type="checkbox" id="feature1" value = "b"> <font color="#9C7A5A" class="feature1"> </font> </br>
+				<input type="checkbox" id="feature2" value = "c"> <font color="#9C7A5A" class="feature2"> </font>  </br>
+				<input type="checkbox" id="feature3" value = "d"> <font color="#9C7A5A" class="feature3"> </font>  </br>
+				<input type="checkbox" id="feature4" value = "e"> <font color="#9C7A5A" class="feature4"> </font>  
+			</form>
+			</td>
+			
+			<td class='meaning-data'>
+				&nbsp &nbsp <input type="text" name="meaning0"></br>
+				&nbsp &nbsp <input type="text" name="meaning1"></br></br></br></br>
+			</td>
+			<td>&nbsp &nbsp </td>
+			<td class='key-data'>
+				<input type="text" name="key0"></br>
+				<input type="text" name="key1"></br>
+				<input type="text" name="key2"></br>
+				<input type="text" name="key3"></br></br>
+			</td>
+			<td> &nbsp &nbsp </td>
+			<td>
+			
+<!--SAVE/SUBMIT BUTTON-->
+				<button id="save-button" class="Save" type="button"><b> Save & </br> Continue </b></button>
+				<button3 id="catharsis-button" class="Catharsis" type="button" style = "text-align: center; border: 3px solid #9C7A5A""> Resolve </br> the </br> Reading </button3>
+
+			</td>
+		</tr>
+	</table>
+<!--END OF BIG DATA TABLE-->
+</td></tr>
+
+</table>
+</td></tr>
+
+</table><!--END OF SITE TABLE--></td></tr></table>
+
+<div id ="theconclusion">
+<br/><br/>
+<table><tr>
+<td> &nbsp &nbsp &nbsp &nbsp &nbsp  </td>
+<td>
+<br/><br/>
+<div style = "text-align:left; color: #83A7C6">
+This last card gets used a bit differently.</br>
+It's the card that will resolve the reading and ultimately answer your question.</br>
+The goal is to use it to tie all of the symbols and interpretations together </br>
+into <b>the conclusion of a single story</b>. </div>
+
+<table>
+	<tr><td>
+	</br></br><b>Resolution</b></br></br>
+	<img id=LastCard src="cardBACK2.png" style="width:200px; box-shadow: 0px 0px 30px 10px #090F26"><br/>
+	</br><button3 class="LastFlip" type="button3" id="lastflip" style="border: 3px solid #9C7A5A"><b>Flip</b></button3>
+	</td>
+	<td> &nbsp &nbsp &nbsp </td>
+	<td>
+	<div id="finalmeanings" style="text-align:left; max-width:160px" color="#4B7096" class="finalmeaningtext"> </div>
+	</td></tr>
+</table>
+	
+</td>
+
+<td> &nbsp &nbsp &nbsp &nbsp &nbsp </td>
+
+<td> 
+	<table id="finaltableau">
+	<tr><td> 
+	</br></br></br><b>You Are...</b></br></br>
+	<img id="TopCard" src="cardBACK2.png" style="width:60px; box-shadow: 0px 0px 20px 3px #090F26" ><br/>
+	</td>
+	<td>
+	&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </br>
+	</br><div id="keywords1" style="text-align:left; max-width:120px" color="#4B7096" class="kewordlist1"> </div>
+	</td>
+	</tr>
+	<tr><td>
+    </br><b>Motivation</b></br></br>
+	<img id="MidCard" src="cardBACK2.png" style="width:60px; box-shadow: 0px 0px 20px 3px #090F26"><br/>
+	</td>
+	<td>
+	&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </br>
+	</br><div id="keywords2" style="text-align:left; max-width:120px" color="#4B7096" class="kewordlist2"> </div>
+	</td>
+	</tr>
+	<tr><td>
+    </br><b>Obstacles</b></br></br>
+	<img id="LowCard" src="cardBACK2.png" style="width:60px; box-shadow: 0px 0px 20px 3px #090F26"><br/>
+	</td>
+	<td>
+	&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </br>
+	</br><div id="keywords3" style="text-align:left; max-width:120px" color="#4B7096" class="kewordlist3"> </div>
+	</td>
+	</tr>
+	<tr><td>
+	</br><button3 class="ReviewAll" type="button3" id="reviewall" style="border: 3px solid #9C7A5A"><b>Review All</b></button3>
+	</td></tr>
+	</table>
+</td>
+
+<td> &nbsp </td>
+
+<td> </br></br>
+<div style="text-align:left; max-width: 400px; font-weight:bold" color="#4B7096" class="finalquestiontext"></div>
+</br></br>
+<textarea id="userconclusion" name="userconclusion" cols="60" rows="28" ></textarea> </br></br>
+<div style = "text-align:right; color: #83A7C6">
+<b>Fin. &nbsp &nbsp &nbsp </b> </div>
+</td>
+
+</tr></table>
+
+<br/><br/>
+
+</div>
+
+
+<div id="attribution">
+<br/> <br/>
+<br/><br/><br/> <font color="#9C7A5A" size="4">
+<div style = "text-align:center"> <b>==== IRREVERENT TAROT</b> &nbsp created by Zandra V. using the Rider-Waite Tarot Deck ==== &nbsp  &nbsp  &nbsp &nbsp &nbsp </div>
+	</font>	
+	
+	<!--
+<br/> <font color="white" size="5">
+	<b>THE TAROT DECK:</b>
+    <br/><br/>
+	</font>	
+	
+<table>
+  <tr>
+    <td>0</td>
+    <td>2</td>		
+    <td>8</td>
+  </tr>
+  <tr>
+   <td><img id=Card0 src="card0.png" style="width:100px"><br/>
+   <button class="Card0" type="button">The Fool</button></td>
+   <td><img id=Card2 src="card2.png" style="width:100px"><br/>
+   <button class="Card2" type="button">The Priestess</button></td>
+   <td><img id=Card8 src="card8.png" style="width:100px"><br/>
+   <button class="Card8" type="button">Strength</button></td>
+   </tr>
+</table>
+</div> 
+
+<br/> 
+<div class="codeTitle"></div>
+<br/>
+<div class="yourBudget"></div>
+<br/>
+<div class="rawText"></div> 
+<br/>
+<div class="operations"></div>
+    
+<br/>
+<br/> -->
+</body>
+<script type="text/javascript" src="jquery-2.1.1.js"></script>
+<script type="text/javascript" src="cardcode1.js"></script>
